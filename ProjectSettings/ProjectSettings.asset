@@ -136,8 +136,7 @@ PlayerSettings:
     Others: 1
   bundleVersion: 0.1
   preloadedAssets:
-  - {fileID: 3179201961455933200, guid: 4af92bd604a111c448fba45c8ad45ac5, type: 2}
-  - {fileID: 5444015789791377139, guid: 92903d30c8cff774a8d6bf52ceb8b48f, type: 2}
+  - {fileID: 0}
   - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -617,11 +616,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: Cooking-Recipe
   metroPackageVersion: 1.0.0.0
-  metroCertificatePath: 
+  metroCertificatePath: C:\Cooking_Recipe\Cooking_Recipe\Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: DefaultCompany
+  metroCertificateIssuer: DefaultCompany
+  metroCertificateNotAfter: 001a35dacfd5d901
   metroApplicationDescription: Template_3D
   wsaImages: {}
   metroTileShortName: Cooking
