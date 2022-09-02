@@ -5,39 +5,60 @@ public class Carbonara:IRecipe
 {
     private int _participants;
 
+    private Dictionary<string, Ingredient> _ingrediants;
+    private List<CookingStep> _cookingSteps;
+
+    public string Name => "Spargetti Carbonara";
+
+    public Difficulty Difficulty => Difficulty.EASY_MEDIUM;
+
+    public int Duration => 20;
+
+    public List<CookingStep> CookingSteps => _cookingSteps;
+
+    public int Participants { get => _participants; set => _participants = value; }
+
+    public Dictionary<string, Ingredient> Ingredients => _ingrediants;
+
+
     public Carbonara(int participants)
     {
         this._participants = participants;
+        CreateIngredients();
+        CreateCookingSteps();
     }
 
-    private Dictionary<string, Ingredient> CreateIngredients()
+    private void CreateIngredients()
     {
-        Dictionary<string, Ingredient> ingredients = new Dictionary<string, Ingredient>();
+        _ingrediants = new Dictionary<string, Ingredient>();
         // 400g Spaghetti für 4 Personen --> 100g pro Person
-        ingredients.Add("spaghetti", new Ingredient("Spaghetti", 100 * Participants, "g"));
+        _ingrediants.Add(GameObjects.SPAGHETTI, new Ingredient("Spaghetti", 100 * Participants, "g"));
         // 200g Speckwürfel für 4 Personen --> 50g pro Person
-        ingredients.Add("bacon cubes", new Ingredient("Bacon cubes", 50 * Participants, "g"));
+        _ingrediants.Add(GameObjects.BACON_CUBES, new Ingredient("Bacon cubes", 50 * Participants, "g"));
         // 4 Eier für 4 Personen --> 1 Ei pro Person
-        ingredients.Add("eggs", new Ingredient("Eggs", 1 * Participants, ""));
+        _ingrediants.Add(GameObjects.EGG, new Ingredient("Eggs", 1 * Participants, ""));
         // 50g Butter für 4 Personen --> 12,5g pro Person
-        ingredients.Add("butter", new Ingredient("Butter", (12.5 * Participants), "g"));
+        _ingrediants.Add(GameObjects.BUTTER, new Ingredient("Butter", (12.5 * Participants), "g"));
         // salt
-        ingredients.Add("salt", new Ingredient("Salt", 1, ""));
+        _ingrediants.Add(GameObjects.SALT, new Ingredient("Salt", 1, ""));
         // pepper
-        ingredients.Add("pepper", new Ingredient("Pepper", 1, ""));
+        _ingrediants.Add(GameObjects.PEPPER, new Ingredient("Pepper", 1, ""));
         // 1 Prise Muskatpulver für 4 Personen --> 1/4 Prise pro Person
-        ingredients.Add("nutmeg powder", new Ingredient("Nutmeg powder", (0.25 * Participants), "pinch"));
+        _ingrediants.Add(GameObjects.NUTMEG, new Ingredient("Nutmeg powder", (0.25 * Participants), "pinch"));
         // 100g Parmesan für 4 Personen --> 25g pro Person
-        ingredients.Add("parmesan", new Ingredient("Parmesan", (25 * Participants), "g"));
-
-        return ingredients;
+        _ingrediants.Add(GameObjects.PARMESAN, new Ingredient("Parmesan", (25 * Participants), "g"));
     }
 
 
-    private List<string> GetCookingSteps()
+    private void CreateCookingSteps()
     {
-        List<string> steps = new List<string>();
+        _cookingSteps = new List<CookingStep>();
 
+        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.OLIVE_OIL }, "Put olive oil in pan"));
+        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.BACON_CUBES }, "Put Bacon cubes in pan and then sear them"));
+
+
+        /*
         steps.Add("Put olive oil in pan");
         steps.Add("Bacon cubes in pan");
         steps.Add("Bacon cubes sear"); // sear = anbraten
@@ -55,22 +76,6 @@ public class Carbonara:IRecipe
         steps.Add("Drain the pasta");
         steps.Add("Put the spagetti inside the bowl with the egg yolk and mix well.");
         steps.Add("Done! Bon Appetit!");
-
-        return steps;
+        */
     }
-
-
-
-
-    public string Name => "Spargetti Carbonara";
-
-    public Difficulty Difficulty => Difficulty.EASY;
-
-    public int Duration => 20;
-
-    public List<string> CookingSteps => GetCookingSteps();
-
-    public int Participants { get => _participants; set => _participants = value; }
-
-    public Dictionary<string, Ingredient> Ingredients => CreateIngredients();
 }

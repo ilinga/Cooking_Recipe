@@ -12,7 +12,7 @@ public interface IRecipe
 
     public Dictionary<string, Ingredient> Ingredients { get; }
 
-    public List<string> CookingSteps { get; }
+    public List<CookingStep> CookingSteps { get; }
 
     public int Participants { get; set; }
 

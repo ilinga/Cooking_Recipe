@@ -30,9 +30,11 @@ public class ObjectHandler : MonoBehaviour
         }
     }
     */
-    public static void AddObject(GameObject gameObject, Vector3 vector3)
+    public static void AddObject(GameObject gameObject, Vector3 position)
     {
-        Instantiate(gameObject, vector3, Quaternion.identity);
+        Vector3 gameObjectRotation = gameObject.transform.localRotation.eulerAngles;
+        Quaternion rotation = Quaternion.Euler(gameObjectRotation.x, gameObjectRotation.y, gameObjectRotation.z);
+        Instantiate(gameObject, position, rotation);
     }
 
     public static void RemoveObject(GameObject gameObject)
