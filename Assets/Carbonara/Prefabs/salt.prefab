@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8241210723756879195}
   - component: {fileID: -4075299041985493107}
   - component: {fileID: 6684094214803165912}
+  - component: {fileID: 6814113116074435427}
   m_Layer: 0
   m_Name: salt
   m_TagString: Untagged
@@ -170,6 +171,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.951237, y: 4.513128, z: 11.968216}
   m_Center: {x: -0.4, y: -0.5, z: 0.4}
+--- !u!114 &6814113116074435427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3501487273158290268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed4d34f9321f8b49a60dfb00b2f307e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObject: {fileID: 3501487273158290268}
 --- !u!1001 &9061184466095555858
 PrefabInstance:
   m_ObjectHideFlags: 0
