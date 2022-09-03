@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1986375670546546, guid: 573c24db696ae0b4091b43e2066b558d, type: 3}
       propertyPath: m_Name
-      value: DeepPlate Variant
+      value: bowl
+      objectReference: {fileID: 0}
+    - target: {fileID: 1986375670546546, guid: 573c24db696ae0b4091b43e2066b558d, type: 3}
+      propertyPath: m_TagString
+      value: bowl
       objectReference: {fileID: 0}
     - target: {fileID: 4803934733476274, guid: 573c24db696ae0b4091b43e2066b558d, type: 3}
       propertyPath: m_RootOrder
@@ -164,3 +168,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject: {fileID: 8237973425758970244}
+  x: 0
+  y: 0
+  z: 0

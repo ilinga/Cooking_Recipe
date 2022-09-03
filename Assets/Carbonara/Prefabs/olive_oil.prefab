@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1663158576358738, guid: cbd05acb56e7f6246ad7184ffb112eb9, type: 3}
       propertyPath: m_Name
-      value: OliveOil Variant
+      value: olive_oil
+      objectReference: {fileID: 0}
+    - target: {fileID: 1663158576358738, guid: cbd05acb56e7f6246ad7184ffb112eb9, type: 3}
+      propertyPath: m_TagString
+      value: olive_oil
       objectReference: {fileID: 0}
     - target: {fileID: 4315002568466810, guid: cbd05acb56e7f6246ad7184ffb112eb9, type: 3}
       propertyPath: m_RootOrder
@@ -162,6 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject: {fileID: 758996722629373067}
+  x: 0
+  y: 0
+  z: 0
 --- !u!114 &8080358159179727320
 MonoBehaviour:
   m_ObjectHideFlags: 0

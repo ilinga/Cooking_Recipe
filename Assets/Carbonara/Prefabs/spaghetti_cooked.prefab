@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -3876441635856513143}
   m_Layer: 0
   m_Name: spaghetti_cooked
-  m_TagString: Untagged
+  m_TagString: spaghetti_cooked
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,3 +183,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject: {fileID: 313751873786234241}
+  x: 0
+  y: 0
+  z: 0

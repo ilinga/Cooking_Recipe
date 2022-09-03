@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: pan
       objectReference: {fileID: 0}
+    - target: {fileID: 1361908703428336, guid: 12350bfc702bef44499bfd46c8dbb426, type: 3}
+      propertyPath: m_TagString
+      value: pan
+      objectReference: {fileID: 0}
     - target: {fileID: 4219352889690714, guid: 12350bfc702bef44499bfd46c8dbb426, type: 3}
       propertyPath: m_RootOrder
       value: 0

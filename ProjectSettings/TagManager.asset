@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - olive_oil
+  - spaghetti
+  - pan
+  - bowl
+  - butter
+  - deeppan
+  - egg
+  - nutmeg
+  - parmesan
+  - pepper
+  - salt
+  - spaghetti_cooked
+  - spoon
+  - bacon_cubes
   layers:
   - Default
   - TransparentFX

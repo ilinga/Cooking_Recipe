@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1545127944762756, guid: 32cf7cb5324804148862798ee1f49df8, type: 3}
       propertyPath: m_Name
-      value: Spoon Variant
+      value: spoon
+      objectReference: {fileID: 0}
+    - target: {fileID: 1545127944762756, guid: 32cf7cb5324804148862798ee1f49df8, type: 3}
+      propertyPath: m_TagString
+      value: spoon
       objectReference: {fileID: 0}
     - target: {fileID: 4899968692712328, guid: 32cf7cb5324804148862798ee1f49df8, type: 3}
       propertyPath: m_RootOrder
@@ -136,6 +140,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject: {fileID: 12792650900066472}
+  x: 0
+  y: 0
+  z: 0
 --- !u!114 &3105821296365052878
 MonoBehaviour:
   m_ObjectHideFlags: 0

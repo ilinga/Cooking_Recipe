@@ -9,7 +9,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1927873179091148, guid: d15472a0ad9a62e49a54ad28cabd11cb, type: 3}
       propertyPath: m_Name
-      value: deeppan Variant
+      value: deeppan
+      objectReference: {fileID: 0}
+    - target: {fileID: 1927873179091148, guid: d15472a0ad9a62e49a54ad28cabd11cb, type: 3}
+      propertyPath: m_TagString
+      value: deeppan
       objectReference: {fileID: 0}
     - target: {fileID: 4297064017948486, guid: d15472a0ad9a62e49a54ad28cabd11cb, type: 3}
       propertyPath: m_RootOrder
@@ -93,6 +97,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject: {fileID: 356632087652846415}
+  x: 0
+  y: 0
+  z: 0
 --- !u!114 &-6720111876736760841
 MonoBehaviour:
   m_ObjectHideFlags: 0

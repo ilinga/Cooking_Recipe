@@ -55,7 +55,7 @@ public class Carbonara:IRecipe
         _cookingSteps = new List<CookingStep>();
 
         _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.OLIVE_OIL }, "Put olive oil in pan"));
-        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.BACON_CUBES }, "Put Bacon cubes in pan and then sear them"));
+        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.SPAGHETTI, GameObjects.SALT }, "Put Bacon cubes in pan and then sear them"));
 
 
         /*

@@ -32,6 +32,8 @@ public class ObjectHandler : MonoBehaviour
     */
     public static void AddObject(GameObject gameObject, Vector3 position)
     {
+        var tag = gameObject.name;
+        gameObject.tag = tag;
         Vector3 gameObjectRotation = gameObject.transform.localRotation.eulerAngles;
         Quaternion rotation = Quaternion.Euler(gameObjectRotation.x, gameObjectRotation.y, gameObjectRotation.z);
         Instantiate(gameObject, position, rotation);

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 7356463103953478796}
   m_Layer: 0
   m_Name: egg
-  m_TagString: Untagged
+  m_TagString: egg
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,3 +184,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameObject: {fileID: 7738042749974865805}
+  x: 0
+  y: 0
+  z: 0
