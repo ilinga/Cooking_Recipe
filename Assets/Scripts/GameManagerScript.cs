@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
 
     public List<GameObject> gameObjects;
-    private int _currentStep = 0;
+    public Button BackButton;
+    private int _currentStep = -1;
     private GameObject _goalObject;
     private List<GameObject> _workingObjects;
     private IRecipe _recipe = null;
@@ -22,9 +23,21 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(_currentStep > 0)
+            BackButton.gameObject.SetActive(true);
+        else
+            BackButton.gameObject.SetActive(false);
+        
+
         if (_recipe != null)
         {
-            if(_workingObjects.Count > 0)
+            var amountSteps = _recipe.CookingSteps.Count;
+            if (0 <= _currentStep && _currentStep < amountSteps)
+                GameObject.Find("next_button").GetComponentInChildren<Text>().text = "Next step";
+            else if(_currentStep == _recipe.CookingSteps.Count)
+                GameObject.Find("next_button").GetComponentInChildren<Text>().text = "Finish! Back to menu";
+
+            if (_workingObjects.Count > 0)
             {
                 var goalObjectPosition = GameObject.FindGameObjectWithTag(_goalObject.name).transform.position;
                 List<GameObject> objectsToRemove = new List<GameObject>();
@@ -47,7 +60,7 @@ public class GameManagerScript : MonoBehaviour
                     ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
                 }                  
             }
-            else
+            else if(_currentStep < _recipe.CookingSteps.Count)
             {
                 _currentStep++;
                 NextStep();
@@ -76,6 +89,7 @@ public class GameManagerScript : MonoBehaviour
 
     public void StartRecipe()
     {
+        _currentStep = 0;
         var participants = 4;
 
         _recipe = new Carbonara(participants);
@@ -106,11 +120,56 @@ public class GameManagerScript : MonoBehaviour
             _workingObjects.Add(GetGameObject(workingObjectName));
         }
         PlaceManager(_workingObjects, positionOfWorkingObjects);
-        
+                
     }
 
+    /// <summary>
+    /// Function for Button, to go to next step or start recipe at the beginning
+    /// </summary>
+    public void NextStepViaButton()
+    {
+        if(_recipe != null)
+        {
+            // Recipe not finished yet
+            if(_currentStep < _recipe.CookingSteps.Count)
+            {
+                foreach (var obj in _workingObjects)
+                    ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
+                _workingObjects.Clear();
+                _currentStep++;
+                NextStep();
+            }
+            // Recipe finished
+            else
+            {
+                // Do stuff when Finished
+            }
 
-    
+        }
+        else
+        {
+            StartRecipe();
+        }
+        
+
+    }
+
+    /// <summary>
+    /// Function for Button, to go one step back
+    /// </summary>
+    public void BackStepViaButton()
+    {
+        if(_currentStep > 0)
+        {
+            foreach (var obj in _workingObjects)
+                ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
+            _workingObjects.Clear();
+            _currentStep--;
+            NextStep();
+        }
+        
+
+    }
 
     private void NextStep()
     {
@@ -141,6 +200,11 @@ public class GameManagerScript : MonoBehaviour
             }
             PlaceManager(_workingObjects, positionOfWorkingObjects);
         }
+        /*
+        else
+        {
+            GameObject.Find("next_button").GetComponentInChildren<Text>().text = "Finish! Back to menu";
+        }*/
 
     }
 
