@@ -18,7 +18,7 @@ public class Carbonara:IRecipe
 
     public int Participants { get => _participants; set => _participants = value; }
 
-    public Dictionary<string, Ingredient> Ingredients => _ingrediants;
+    public Dictionary<string, Ingredient> Ingredients => CreateIngredients();
 
 
     public Carbonara(int participants)
@@ -28,7 +28,7 @@ public class Carbonara:IRecipe
         CreateCookingSteps();
     }
 
-    private void CreateIngredients()
+    private Dictionary<string, Ingredient> CreateIngredients()
     {
         _ingrediants = new Dictionary<string, Ingredient>();
         // 400g Spaghetti für 4 Personen --> 100g pro Person
@@ -47,6 +47,8 @@ public class Carbonara:IRecipe
         _ingrediants.Add(GameObjects.NUTMEG, new Ingredient("Nutmeg powder", (0.25 * Participants), "pinch"));
         // 100g Parmesan für 4 Personen --> 25g pro Person
         _ingrediants.Add(GameObjects.PARMESAN, new Ingredient("Parmesan", (25 * Participants), "g"));
+
+        return _ingrediants;
     }
 
 
@@ -70,6 +72,7 @@ public class Carbonara:IRecipe
         steps.Add("Cream butter and mix well with egg yolks");
         steps.Add("Add bacon cubes and parmesan");
         steps.Add("Whisk");
+        //TODO wasser salzen
         steps.Add("Now noodles have to be cooked. Put water in a deep pan and boil water.");
         steps.Add("When the water boils put the spagetti inside the deep pan.");
         steps.Add("Wait about 10 minutes and stir every now and then.");

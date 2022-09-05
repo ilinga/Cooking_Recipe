@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
@@ -101,9 +102,7 @@ public class GameManagerScript : MonoBehaviour
     public void StartRecipe()
     {
         _currentStep = 0;
-        var participants = 4;
-
-        _recipe = new Carbonara(participants);
+        _recipe = RecipeList.Recipes[RecipeList.selectedRecipeNo];
 
         //get position of anchor board and remove the board
         var board = GameObject.Find(GameObjects.BOARD);
@@ -134,6 +133,7 @@ public class GameManagerScript : MonoBehaviour
             else
             {
                 // Do stuff when Finished
+                SceneManager.LoadScene("Recipe_Selector", LoadSceneMode.Single);
             }
 
         }

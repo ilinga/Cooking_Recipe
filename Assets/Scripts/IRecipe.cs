@@ -8,6 +8,9 @@ public interface IRecipe
 
     public Difficulty Difficulty { get; }
 
+    /// <summary>
+    /// Time in minutes
+    /// </summary>
     public int Duration { get; }
 
     public Dictionary<string, Ingredient> Ingredients { get; }
