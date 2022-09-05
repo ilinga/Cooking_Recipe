@@ -23,6 +23,8 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Handle back button if it should be visible or not
+        // Not visible when Recipe did not start or first step so you cannot go back
         if(_currentStep > 0)
             BackButton.gameObject.SetActive(true);
         else
@@ -31,14 +33,17 @@ public class GameManagerScript : MonoBehaviour
 
         if (_recipe != null)
         {
+            // Handle text of NextButton
             var amountSteps = _recipe.CookingSteps.Count;
             if (0 <= _currentStep && _currentStep < amountSteps)
                 GameObject.Find("next_button").GetComponentInChildren<Text>().text = "Next step";
             else if(_currentStep == _recipe.CookingSteps.Count)
                 GameObject.Find("next_button").GetComponentInChildren<Text>().text = "Finish! Back to menu";
 
+            // Check if there are working objects so that step is not done yet
             if (_workingObjects.Count > 0)
             {
+                // Checking distance of working objects to goal object
                 var goalObjectPosition = GameObject.FindGameObjectWithTag(_goalObject.name).transform.position;
                 List<GameObject> objectsToRemove = new List<GameObject>();
                 foreach (var workingObject in _workingObjects)
@@ -60,6 +65,8 @@ public class GameManagerScript : MonoBehaviour
                     ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
                 }                  
             }
+            // Step is done and prevents incrementing steps when whole recipe is finished
+            // (so that back button still works from last step, otherwise it gets incremented each frame)
             else if(_currentStep < _recipe.CookingSteps.Count)
             {
                 _currentStep++;
@@ -87,40 +94,24 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+
+    /// <summary>
+    /// Starts recipe and first step appears
+    /// </summary>
     public void StartRecipe()
     {
         _currentStep = 0;
         var participants = 4;
 
         _recipe = new Carbonara(participants);
-        
-        _workingObjects = new List<GameObject>();
-        var cookingStep = _recipe.CookingSteps[_currentStep];
 
-        //place goal object
-        _goalObject = GetGameObject(cookingStep.GoalObject);
         //get position of anchor board and remove the board
         var board = GameObject.Find(GameObjects.BOARD);
         _postionOfAnchor = board.transform.position;
         ObjectHandler.RemoveObject(board);
-        PlaceManager(new List<GameObject> { _goalObject }, new List<Vector3> { _postionOfAnchor });
 
-        //place working objects
-        List<Vector3> positionOfWorkingObjects = new List<Vector3>();
-        positionOfWorkingObjects.Add(new Vector3(_postionOfAnchor.x + 5, _postionOfAnchor.y, _postionOfAnchor.z));
-        for(int objectIndex = 0; objectIndex < cookingStep.WorkingObjects.Count; objectIndex++)
-        {
-            if (objectIndex > 0)
-            {
-                var oldPosition = positionOfWorkingObjects[objectIndex - 1];
-                var position = new Vector3(oldPosition.x + 5, oldPosition.y, oldPosition.z);
-                positionOfWorkingObjects.Add(position);
-            }
-            var workingObjectName = cookingStep.WorkingObjects[objectIndex];
-            _workingObjects.Add(GetGameObject(workingObjectName));
-        }
-        PlaceManager(_workingObjects, positionOfWorkingObjects);
-                
+        PlaceObjectsOfCurrentStep();
+
     }
 
     /// <summary>
@@ -171,44 +162,21 @@ public class GameManagerScript : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Loads new step (defined by _currentStep variable)
+    /// </summary>
     private void NextStep()
     {
         ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(_goalObject.name));
         if (_currentStep < _recipe.CookingSteps.Count)
-        {
-            _workingObjects = new List<GameObject>();
-            var cookingStep = _recipe.CookingSteps[_currentStep];
-
-            //place goal object
-            _goalObject = GetGameObject(cookingStep.GoalObject);
-            //get position of anchor board and remove the board
-            PlaceManager(new List<GameObject> { _goalObject }, new List<Vector3> { _postionOfAnchor });
-
-            //place working objects
-            List<Vector3> positionOfWorkingObjects = new List<Vector3>();
-            positionOfWorkingObjects.Add(new Vector3(_postionOfAnchor.x + 5, _postionOfAnchor.y, _postionOfAnchor.z));
-            for (int objectIndex = 0; objectIndex < cookingStep.WorkingObjects.Count; objectIndex++)
-            {
-                if (objectIndex > 0)
-                {
-                    var oldPosition = positionOfWorkingObjects[objectIndex - 1];
-                    var position = new Vector3(oldPosition.x + 5, oldPosition.y, oldPosition.z);
-                    positionOfWorkingObjects.Add(position);
-                }
-                var workingObjectName = cookingStep.WorkingObjects[objectIndex];
-                _workingObjects.Add(GetGameObject(workingObjectName));
-            }
-            PlaceManager(_workingObjects, positionOfWorkingObjects);
-        }
-        /*
-        else
-        {
-            GameObject.Find("next_button").GetComponentInChildren<Text>().text = "Finish! Back to menu";
-        }*/
-
+            PlaceObjectsOfCurrentStep();
     }
 
-
+    /// <summary>
+    /// Returns GameObject from list gameObjects by its name
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns>GameObject</returns>
     private GameObject GetGameObject(string name)
     {
         foreach(var obj in gameObjects)
@@ -221,5 +189,34 @@ public class GameManagerScript : MonoBehaviour
         return null;
     }
 
+
+    /// <summary>
+    /// Places goal object and working objects of specific step
+    /// </summary>
+    private void PlaceObjectsOfCurrentStep()
+    {
+        _workingObjects = new List<GameObject>();
+        var cookingStep = _recipe.CookingSteps[_currentStep];
+
+        //place goal object
+        _goalObject = GetGameObject(cookingStep.GoalObject);
+        PlaceManager(new List<GameObject> { _goalObject }, new List<Vector3> { _postionOfAnchor });
+
+        //place working objects
+        List<Vector3> positionOfWorkingObjects = new List<Vector3>();
+        positionOfWorkingObjects.Add(new Vector3(_postionOfAnchor.x + 5, _postionOfAnchor.y, _postionOfAnchor.z));
+        for (int objectIndex = 0; objectIndex < cookingStep.WorkingObjects.Count; objectIndex++)
+        {
+            if (objectIndex > 0)
+            {
+                var oldPosition = positionOfWorkingObjects[objectIndex - 1];
+                var position = new Vector3(oldPosition.x + 5, oldPosition.y, oldPosition.z);
+                positionOfWorkingObjects.Add(position);
+            }
+            var workingObjectName = cookingStep.WorkingObjects[objectIndex];
+            _workingObjects.Add(GetGameObject(workingObjectName));
+        }
+        PlaceManager(_workingObjects, positionOfWorkingObjects);
+    }
 
 }
