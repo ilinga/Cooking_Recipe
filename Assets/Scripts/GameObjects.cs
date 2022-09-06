@@ -17,4 +17,5 @@ public static class GameObjects
     public const string SPAGHETTI_COOKED = "spaghetti_cooked";
     public const string SPAGHETTI = "spaghetti";
     public const string SPOON = "spoon";
+    public const string COOKING_BOOK = "cooking_book";
 }

@@ -8,7 +8,7 @@ public class GameManagerScript : MonoBehaviour
 {
 
     public List<GameObject> gameObjects;
-    public Button BackButton;
+    public GameObject CookingBook;
     private int _currentStep = -1;
     private GameObject _goalObject;
     private List<GameObject> _workingObjects;
@@ -26,20 +26,32 @@ public class GameManagerScript : MonoBehaviour
     {
         // Handle back button if it should be visible or not
         // Not visible when Recipe did not start or first step so you cannot go back
-        if(_currentStep > 0)
-            BackButton.gameObject.SetActive(true);
+        if (_currentStep > 0)
+            CookingBook.transform.GetChild(0).gameObject.SetActive(true);
+        //CookingBook.transform.Find("back_button").GetComponent<Button>().gameObject.SetActive(true);
+        //BackButton.gameObject.SetActive(true);
         else
-            BackButton.gameObject.SetActive(false);
-        
+            CookingBook.transform.GetChild(0).gameObject.SetActive(false);
+        //CookingBook.transform.Find("back_button").GetComponent<Button>().gameObject.SetActive(false);
+        //BackButton.gameObject.SetActive(false);      
 
         if (_recipe != null)
         {
+
             // Handle text of NextButton
             var amountSteps = _recipe.CookingSteps.Count;
-            if (0 <= _currentStep && _currentStep < amountSteps)
-                GameObject.Find("next_button").GetComponentInChildren<Text>().text = "Next step";
-            else if(_currentStep == _recipe.CookingSteps.Count)
-                GameObject.Find("next_button").GetComponentInChildren<Text>().text = "Finish! Back to menu";
+            //if (0 <= _currentStep && _currentStep < amountSteps)
+                //CookingBook.transform.GetChild(1).gameObject.GetComponentInChildren<Text>().text = "Next step";
+                //GameObject.FindGameObjectWithTag("text_next_button").GetComponentInChildren<Text>().text = "Next step";
+                //CookingBook.transform.GetChild(1).GetComponentInChildren<TextMesh>().text = "Next step";
+                //CookingBook.transform.GetChild(1).gameObject.transform.GetChild(3).GetComponentInChildren<Text>().text = "Next step";
+
+            //else if (_currentStep == _recipe.CookingSteps.Count)
+                //CookingBook.transform.GetChild(1).gameObject.transform.GetChild(3).GetComponentInChildren<Text>().text = "Finish! Back to menu";
+            //CookingBook.transform.GetChild(1).gameObject.GetComponentInChildren<Text>().text = "Finish! Back to menu";
+            //CookingBook.transform.GetChild(1).gameObject.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Finish! Back to menu";
+            //GameObject.FindGameObjectWithTag("next_button").GetComponentInChildren<Text>().text = "Finish! Back to menu";
+            //CookingBook.transform.GetChild(1).GetComponentInChildren<TextMesh>().text = "Finish! Back to menu";
 
             // Check if there are working objects so that step is not done yet
             if (_workingObjects.Count > 0)
@@ -50,11 +62,11 @@ public class GameManagerScript : MonoBehaviour
                 foreach (var workingObject in _workingObjects)
                 {
                     var obj = GameObject.FindGameObjectWithTag(workingObject.name);
-                    if(obj != null)
+                    if (obj != null)
                     {
                         var workingObjectPosition = obj.transform.position;
                         var distanceSqr = (goalObjectPosition - workingObjectPosition).sqrMagnitude;
-                        if (distanceSqr <= 2)
+                        if (distanceSqr <= 0.02)
                         {
                             objectsToRemove.Add(workingObject);
                         }
@@ -64,16 +76,16 @@ public class GameManagerScript : MonoBehaviour
                 {
                     _workingObjects.Remove(obj);
                     ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
-                }                  
+                }
             }
             // Step is done and prevents incrementing steps when whole recipe is finished
             // (so that back button still works from last step, otherwise it gets incremented each frame)
-            else if(_currentStep < _recipe.CookingSteps.Count)
+            else if (_currentStep < _recipe.CookingSteps.Count)
             {
                 _currentStep++;
                 NextStep();
             }
-            
+
         }
     }
 
@@ -108,8 +120,9 @@ public class GameManagerScript : MonoBehaviour
         var board = GameObject.Find(GameObjects.BOARD);
         _postionOfAnchor = board.transform.position;
         ObjectHandler.RemoveObject(board);
-
         PlaceObjectsOfCurrentStep();
+        var cooking_book_position = new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z + 0.4f);
+        PlaceManager(new List<GameObject> { GetGameObject(GameObjects.COOKING_BOOK) }, new List<Vector3> { cooking_book_position });
 
     }
 
@@ -204,13 +217,13 @@ public class GameManagerScript : MonoBehaviour
 
         //place working objects
         List<Vector3> positionOfWorkingObjects = new List<Vector3>();
-        positionOfWorkingObjects.Add(new Vector3(_postionOfAnchor.x + 5, _postionOfAnchor.y, _postionOfAnchor.z));
+        positionOfWorkingObjects.Add(new Vector3(_postionOfAnchor.x + 0.4f, _postionOfAnchor.y, _postionOfAnchor.z));
         for (int objectIndex = 0; objectIndex < cookingStep.WorkingObjects.Count; objectIndex++)
         {
             if (objectIndex > 0)
             {
                 var oldPosition = positionOfWorkingObjects[objectIndex - 1];
-                var position = new Vector3(oldPosition.x + 5, oldPosition.y, oldPosition.z);
+                var position = new Vector3(oldPosition.x + 0.4f, oldPosition.y, oldPosition.z);
                 positionOfWorkingObjects.Add(position);
             }
             var workingObjectName = cookingStep.WorkingObjects[objectIndex];

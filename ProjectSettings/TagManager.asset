@@ -18,6 +18,10 @@ TagManager:
   - spaghetti_cooked
   - spoon
   - bacon_cubes
+  - next_button
+  - back_button
+  - text_next_button
+  - cooking_book
   layers:
   - Default
   - TransparentFX
