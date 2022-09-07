@@ -28,6 +28,8 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
         // Handle back button if it should be visible or not
         // Not visible when Recipe did not start or first step so you cannot go back
         if (_currentStep > 0)
@@ -100,6 +102,7 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void StartRecipe()
     {
+
         _currentStep = 0;
         _recipe = RecipeList.Recipes[RecipeList.selectedRecipeNo];
 
@@ -113,6 +116,8 @@ public class GameManagerScript : MonoBehaviour
         GameObject.FindGameObjectWithTag(GameObjects.COOKING_BOOK).transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         GameObject.FindGameObjectWithTag(GameObjects.COOKING_BOOK).transform.position = new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z + 0.4f);
 
+
+        //Test();
     }
 
 
@@ -262,7 +267,10 @@ public class GameManagerScript : MonoBehaviour
     #endregion
 
 
-    
+    public void Test()
+    {
+        GameObject.FindGameObjectWithTag(_goalObject.name).GetComponentInChildren<Animator>().SetBool("animate", true);
+    }
 
 
 
