@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
+    #region gloabl variables
 
     public List<GameObject> gameObjects;
     public GameObject CookingBook;
@@ -14,6 +15,9 @@ public class GameManagerScript : MonoBehaviour
     private List<GameObject> _workingObjects;
     private IRecipe _recipe = null;
     private Vector3 _postionOfAnchor;
+
+    #endregion
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,8 +47,9 @@ public class GameManagerScript : MonoBehaviour
                 //CookingBook.transform.GetChild(1).GetComponentInChildren<TextMesh>().text = "Next step";
                 //CookingBook.transform.GetChild(1).gameObject.transform.GetChild(3).GetComponentInChildren<Text>().text = "Next step";
 
-            //else if (_currentStep == _recipe.CookingSteps.Count)
-                //CookingBook.transform.GetChild(1).gameObject.transform.GetChild(3).GetComponentInChildren<Text>().text = "Finish! Back to menu";
+            //if (_currentStep == _recipe.CookingSteps.Count)
+                //GameObject.FindGameObjectWithTag("next_button").GetComponent<Text>().text = "Finish! Back to menu";
+            //CookingBook.transform.GetChild(1).gameObject.transform.GetChild(3).GetComponentInChildren<Text>().text = "Finish! Back to menu";
             //CookingBook.transform.GetChild(1).gameObject.GetComponentInChildren<Text>().text = "Finish! Back to menu";
             //CookingBook.transform.GetChild(1).gameObject.transform.GetChild(3).gameObject.GetComponent<Text>().text = "Finish! Back to menu";
             //GameObject.FindGameObjectWithTag("next_button").GetComponentInChildren<Text>().text = "Finish! Back to menu";
@@ -86,24 +91,9 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
-    
 
-    public void PlaceManager(List<GameObject> gameObjects, List<Vector3> position)
-    { 
-        for(int i = 0; i < gameObjects.Count; i++)
-        {
-            ObjectHandler.AddObject(gameObjects[i], position[i]);
-        }
-    }
 
-    public void RemoveManager(List<GameObject> gameObjects)
-    {
-        for(int i = 0; i < gameObjects.Count; i++)
-        {
-            ObjectHandler.RemoveObject(gameObjects[i]);
-        }
-    }
-
+    #region Recipe functions
 
     /// <summary>
     /// Starts recipe and first step appears
@@ -119,61 +109,12 @@ public class GameManagerScript : MonoBehaviour
         ObjectHandler.RemoveObject(board);
         PlaceObjectsOfCurrentStep();
 
+        // set cooking book
         GameObject.FindGameObjectWithTag(GameObjects.COOKING_BOOK).transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
         GameObject.FindGameObjectWithTag(GameObjects.COOKING_BOOK).transform.position = new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z + 0.4f);
-        //var cooking_book_position = new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z + 0.4f);
-        //PlaceManager(new List<GameObject> { GetGameObject(GameObjects.COOKING_BOOK) }, new List<Vector3> { cooking_book_position });
 
     }
 
-    /// <summary>
-    /// Function for Button, to go to next step or start recipe at the beginning
-    /// </summary>
-    public void NextStepViaButton()
-    {
-        if(_recipe != null)
-        {
-            // Recipe not finished yet
-            if(_currentStep < _recipe.CookingSteps.Count)
-            {
-                foreach (var obj in _workingObjects)
-                    ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
-                _workingObjects.Clear();
-                _currentStep++;
-                NextStep();
-            }
-            // Recipe finished
-            else
-            {
-                // Do stuff when Finished
-                SceneManager.LoadScene("Recipe_Selector", LoadSceneMode.Single);
-            }
-
-        }
-        else
-        {
-            StartRecipe();
-        }
-        
-
-    }
-
-    /// <summary>
-    /// Function for Button, to go one step back
-    /// </summary>
-    public void BackStepViaButton()
-    {
-        if(_currentStep > 0)
-        {
-            foreach (var obj in _workingObjects)
-                ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
-            _workingObjects.Clear();
-            _currentStep--;
-            NextStep();
-        }
-        
-
-    }
 
     /// <summary>
     /// Loads new step (defined by _currentStep variable)
@@ -185,22 +126,6 @@ public class GameManagerScript : MonoBehaviour
             PlaceObjectsOfCurrentStep();
     }
 
-    /// <summary>
-    /// Returns GameObject from list gameObjects by its name
-    /// </summary>
-    /// <param name="name"></param>
-    /// <returns>GameObject</returns>
-    private GameObject GetGameObject(string name)
-    {
-        foreach(var obj in gameObjects)
-        {
-            if(obj.name == name)
-            {
-                return obj;
-            }
-        }
-        return null;
-    }
 
 
     /// <summary>
@@ -231,5 +156,114 @@ public class GameManagerScript : MonoBehaviour
         }
         PlaceManager(_workingObjects, positionOfWorkingObjects);
     }
+
+
+    #endregion
+
+
+    #region Object Handling
+
+    public void PlaceManager(List<GameObject> gameObjects, List<Vector3> position)
+    { 
+        for(int i = 0; i < gameObjects.Count; i++)
+        {
+            ObjectHandler.AddObject(gameObjects[i], position[i]);
+        }
+    }
+
+    public void RemoveManager(List<GameObject> gameObjects)
+    {
+        for(int i = 0; i < gameObjects.Count; i++)
+        {
+            ObjectHandler.RemoveObject(gameObjects[i]);
+        }
+    }
+
+    /// <summary>
+    /// Returns GameObject from list gameObjects by its name
+    /// </summary>
+    /// <param name="name"></param>
+    /// <returns>GameObject</returns>
+    private GameObject GetGameObject(string name)
+    {
+        foreach (var obj in gameObjects)
+        {
+            if (obj.name == name)
+            {
+                return obj;
+            }
+        }
+        return null;
+    }
+
+    #endregion
+
+
+    #region Button functions
+
+    /// <summary>
+    /// Function for Button, to go to next step or start recipe at the beginning
+    /// </summary>
+    public void NextStepViaButton()
+    {
+        if(_recipe != null)
+        {
+            // Recipe not finished yet
+            if(_currentStep < _recipe.CookingSteps.Count)
+            {
+                foreach (var obj in _workingObjects)
+                    ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
+                _workingObjects.Clear();
+                _currentStep++;
+                NextStep();
+            }
+            // Recipe finished
+            else
+            {
+                // Do stuff when Finished
+                BackToMenu();
+            }
+
+        }
+        else
+        {
+            StartRecipe();
+        }
+        
+
+    }
+
+    /// <summary>
+    /// Function for Button, to go one step back
+    /// </summary>
+    public void BackStepViaButton()
+    {
+        if(_currentStep > 0)
+        {
+            foreach (var obj in _workingObjects)
+                ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
+            _workingObjects.Clear();
+            _currentStep--;
+            NextStep();
+        }
+        
+
+    }
+
+
+    /// <summary>
+    /// Function for Button, to go one step back
+    /// </summary>
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Recipe_Selector", LoadSceneMode.Single);
+    }
+
+    #endregion
+
+
+    
+
+
 
 }
