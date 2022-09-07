@@ -18,7 +18,7 @@ public class GameManagerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GameObject.FindGameObjectWithTag(GameObjects.COOKING_BOOK).transform.localScale = new Vector3(0, 0, 0);
     }
 
     // Update is called once per frame
@@ -27,19 +27,16 @@ public class GameManagerScript : MonoBehaviour
         // Handle back button if it should be visible or not
         // Not visible when Recipe did not start or first step so you cannot go back
         if (_currentStep > 0)
-            CookingBook.transform.GetChild(0).gameObject.SetActive(true);
-        //CookingBook.transform.Find("back_button").GetComponent<Button>().gameObject.SetActive(true);
-        //BackButton.gameObject.SetActive(true);
-        else
-            CookingBook.transform.GetChild(0).gameObject.SetActive(false);
-        //CookingBook.transform.Find("back_button").GetComponent<Button>().gameObject.SetActive(false);
-        //BackButton.gameObject.SetActive(false);      
+            GameObject.FindGameObjectWithTag("back_button").transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        else if(_recipe != null)
+            GameObject.FindGameObjectWithTag("back_button").transform.localScale = new Vector3(0, 0, 0);
+               
 
         if (_recipe != null)
         {
 
             // Handle text of NextButton
-            var amountSteps = _recipe.CookingSteps.Count;
+            //var amountSteps = _recipe.CookingSteps.Count;
             //if (0 <= _currentStep && _currentStep < amountSteps)
                 //CookingBook.transform.GetChild(1).gameObject.GetComponentInChildren<Text>().text = "Next step";
                 //GameObject.FindGameObjectWithTag("text_next_button").GetComponentInChildren<Text>().text = "Next step";
@@ -121,8 +118,11 @@ public class GameManagerScript : MonoBehaviour
         _postionOfAnchor = board.transform.position;
         ObjectHandler.RemoveObject(board);
         PlaceObjectsOfCurrentStep();
-        var cooking_book_position = new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z + 0.4f);
-        PlaceManager(new List<GameObject> { GetGameObject(GameObjects.COOKING_BOOK) }, new List<Vector3> { cooking_book_position });
+
+        GameObject.FindGameObjectWithTag(GameObjects.COOKING_BOOK).transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        GameObject.FindGameObjectWithTag(GameObjects.COOKING_BOOK).transform.position = new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z + 0.4f);
+        //var cooking_book_position = new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z + 0.4f);
+        //PlaceManager(new List<GameObject> { GetGameObject(GameObjects.COOKING_BOOK) }, new List<Vector3> { cooking_book_position });
 
     }
 
