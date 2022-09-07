@@ -20,6 +20,7 @@ public class Carbonara:IRecipe
 
     public Dictionary<string, Ingredient> Ingredients => CreateIngredients();
 
+    public string ImageName => "carbonara";
 
     public Carbonara(int participants)
     {
