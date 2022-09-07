@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class RecipeInfo: MonoBehaviour
 {
@@ -59,6 +60,11 @@ public class RecipeInfo: MonoBehaviour
         transform.Find("Participants no").GetComponent<TMPro.TextMeshPro>().text = recipe.Participants.ToString();
         transform.Find("Ingredient page").GetComponent<TMPro.TextMeshPro>().text = ingrediantPage.ToString() + "/" + ListUtil.getPages<Ingredient>(new List<Ingredient>(recipe.Ingredients.Values), ingrediantSize).ToString();
 
+        var picture = Resources.Load("RecipePictures\\" + recipe.ImageName) as Texture2D;
+        if (!(picture is null))
+        {
+            transform.Find("Picture").GetComponent<MeshRenderer>().material.mainTexture = picture;
+        }
 
         showPage(1);
     }

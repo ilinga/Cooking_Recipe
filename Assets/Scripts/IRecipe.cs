@@ -9,6 +9,11 @@ public interface IRecipe
     public Difficulty Difficulty { get; }
 
     /// <summary>
+    /// name of picture for recipe located in Assets\Resources\RecipePictures
+    /// </summary>
+    public string ImageName { get; }
+
+    /// <summary>
     /// Time in minutes
     /// </summary>
     public int Duration { get; }
@@ -19,4 +24,5 @@ public interface IRecipe
 
     public int Participants { get; set; }
 
+    
 }

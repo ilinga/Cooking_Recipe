@@ -36,4 +36,5 @@ public class Lasagna:IRecipe
 
     public Dictionary<string, Ingredient> Ingredients => CreateIngredients();
 
+    public string ImageName => "lasagna";
 }
