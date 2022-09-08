@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 2569857133169570614}
   - component: {fileID: 2064383272545847372}
   - component: {fileID: 8369093637939640611}
+  - component: {fileID: 6904575881951280879}
   m_Layer: 0
   m_Name: egg
   m_TagString: Untagged
@@ -187,6 +188,25 @@ MonoBehaviour:
   x: 0
   y: 0
   z: 0
+--- !u!95 &6904575881951280879
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4866364158686414630}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4128876070be4fe4fa2670cf3113b5c8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7738042749974865805
 GameObject:
   m_ObjectHideFlags: 0
