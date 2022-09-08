@@ -128,6 +128,7 @@ GameObject:
   - component: {fileID: 3781678956701616319}
   - component: {fileID: 4199660399877870928}
   - component: {fileID: 7651503233761010860}
+  - component: {fileID: 4570442256125189187}
   m_Layer: 0
   m_Name: butter
   m_TagString: Untagged
@@ -299,3 +300,22 @@ MonoBehaviour:
   x: 0
   y: 0
   z: 0
+--- !u!95 &4570442256125189187
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5898851833342107019}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c125b337b0ff72a458a857a06d672cb8, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

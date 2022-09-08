@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8789021391289502727}
   - component: {fileID: 2893300208958832533}
   - component: {fileID: 5893208598701367605}
+  - component: {fileID: 2602266921510928072}
   m_Layer: 0
   m_Name: parmesan
   m_TagString: parmesan
@@ -187,6 +188,25 @@ MonoBehaviour:
   x: 0
   y: 0
   z: 0
+--- !u!95 &2602266921510928072
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547611581647328795}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 582fe3b98ac938d41892cf6c599259f5, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &2638265080001064617
 GameObject:
   m_ObjectHideFlags: 0

@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 1372914047125313299}
   - component: {fileID: 7608659841758700983}
   - component: {fileID: 3687546328176178784}
+  - component: {fileID: 1670585431748505814}
   m_Layer: 0
   m_Name: salt
   m_TagString: Untagged
@@ -218,6 +219,25 @@ MonoBehaviour:
   x: 0
   y: 0
   z: 0
+--- !u!95 &1670585431748505814
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4946525390049571002}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8e3a51a4de6fa7d408244cb47c133f17, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &659889636710111557
 PrefabInstance:
   m_ObjectHideFlags: 0

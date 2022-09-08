@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4757560780720586388}
   - component: {fileID: 7407335318417459274}
   - component: {fileID: 148199355145901772}
+  - component: {fileID: 3734075079861130816}
   m_Layer: 0
   m_Name: nutmeg
   m_TagString: Untagged
@@ -187,6 +188,25 @@ MonoBehaviour:
   x: 0
   y: 0
   z: 0
+--- !u!95 &3734075079861130816
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5393965223381630182}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 222f2cbf2922c7443b489c23f28db652, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &8455639068462400290
 GameObject:
   m_ObjectHideFlags: 0
