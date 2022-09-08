@@ -311,10 +311,10 @@ public class GameManagerScript : MonoBehaviour
                     DropAnimationStart(GetGameObject(workingObject));
                     break;
                 case AnimationType.MOVE_IN_CIRCLE:
-                    DropAnimationStart(GetGameObject(workingObject));
+                    CircleMovementAnimationStart(GetGameObject(workingObject));
                     break;
                 case AnimationType.ROTATE_VERTICAL:
-                    DropAnimationStart(GetGameObject(workingObject));
+                    RotateAnimationStart(GetGameObject(workingObject));
                     break;
                 default:
                     break;
@@ -337,9 +337,44 @@ public class GameManagerScript : MonoBehaviour
         {
             _animationIsOn = true;
             ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.2f, _postionOfAnchor.z));
+            _currentAnimationObject = workingObject;
+            GameObject.FindGameObjectWithTag(workingObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
+        }
+
+    }
+
+    private void CircleMovementAnimationStart(GameObject workingObject)
+    {
+        if (!_animationIsOn)
+        {
+            _animationIsOn = true;
+
+            switch (_goalObject.name)
+            {
+                case GameObjects.PAN:
+                    ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.06f, _postionOfAnchor.z));
+                    break;
+                case GameObjects.DEEPPAN:
+                    ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z));
+                    break;
+                default:
+                    ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z));
+                    break;
+            }
 
             _currentAnimationObject = workingObject;
+            GameObject.FindGameObjectWithTag(workingObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
+        }
 
+    }
+
+    private void RotateAnimationStart(GameObject workingObject)
+    {
+        if (!_animationIsOn)
+        {
+            _animationIsOn = true;
+            ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.4f, _postionOfAnchor.z));
+            _currentAnimationObject = workingObject;
             GameObject.FindGameObjectWithTag(workingObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
         }
 
