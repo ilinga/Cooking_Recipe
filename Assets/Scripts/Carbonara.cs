@@ -33,22 +33,25 @@ public class Carbonara:IRecipe
     {
         _ingrediants = new Dictionary<string, Ingredient>();
         // 400g Spaghetti für 4 Personen --> 100g pro Person
-        _ingrediants.Add(GameObjects.SPAGHETTI, new Ingredient("Spaghetti", 100 * Participants, "g"));
+        _ingrediants.Add(GameObjects.SPAGHETTI, new Ingredient("Spaghetti", 100 * Participants, "g", AnimationType.DROP));
         // 200g Speckwürfel für 4 Personen --> 50g pro Person
-        _ingrediants.Add(GameObjects.BACON_CUBES, new Ingredient("Bacon cubes", 50 * Participants, "g"));
+        _ingrediants.Add(GameObjects.BACON_CUBES, new Ingredient("Bacon cubes", 50 * Participants, "g", AnimationType.DROP));
         // 4 Eier für 4 Personen --> 1 Ei pro Person
-        _ingrediants.Add(GameObjects.EGG, new Ingredient("Eggs", 1 * Participants, ""));
+        _ingrediants.Add(GameObjects.EGG, new Ingredient("Eggs", 1 * Participants, "", AnimationType.DROP));
         // 50g Butter für 4 Personen --> 12,5g pro Person
-        _ingrediants.Add(GameObjects.BUTTER, new Ingredient("Butter", (12.5 * Participants), "g"));
+        _ingrediants.Add(GameObjects.BUTTER, new Ingredient("Butter", (12.5 * Participants), "g", AnimationType.DROP));
         // salt
-        _ingrediants.Add(GameObjects.SALT, new Ingredient("Salt", 1, ""));
+        _ingrediants.Add(GameObjects.SALT, new Ingredient("Salt", 1, "", AnimationType.ROTATE_VERTICAL));
         // pepper
-        _ingrediants.Add(GameObjects.PEPPER, new Ingredient("Pepper", 1, ""));
+        _ingrediants.Add(GameObjects.PEPPER, new Ingredient("Pepper", 1, "", AnimationType.ROTATE_VERTICAL));
         // 1 Prise Muskatpulver für 4 Personen --> 1/4 Prise pro Person
-        _ingrediants.Add(GameObjects.NUTMEG, new Ingredient("Nutmeg powder", (0.25 * Participants), "pinch"));
+        _ingrediants.Add(GameObjects.NUTMEG, new Ingredient("Nutmeg powder", (0.25 * Participants), "pinch", AnimationType.ROTATE_VERTICAL));
         // 100g Parmesan für 4 Personen --> 25g pro Person
-        _ingrediants.Add(GameObjects.PARMESAN, new Ingredient("Parmesan", (25 * Participants), "g"));
-
+        _ingrediants.Add(GameObjects.PARMESAN, new Ingredient("Parmesan", (25 * Participants), "g", AnimationType.ROTATE_VERTICAL));
+        // spoon
+        _ingrediants.Add(GameObjects.SPOON, new Ingredient("Spoon", 1, "", AnimationType.MOVE_IN_CIRCLE));
+        // olive_oil
+        _ingrediants.Add(GameObjects.OLIVE_OIL, new Ingredient("Olive oil", 1, "", AnimationType.ROTATE_VERTICAL));
         return _ingrediants;
     }
 
