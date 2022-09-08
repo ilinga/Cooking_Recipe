@@ -60,8 +60,27 @@ public class Carbonara:IRecipe
     {
         _cookingSteps = new List<CookingStep>();
 
-        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.OLIVE_OIL, GameObjects.SPOON }, "Put olive oil in pan"));
-        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.OLIVE_OIL, GameObjects.SPOON }, "Put Bacon cubes in pan and then sear them"));
+        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.OLIVE_OIL }, "Put olive oil in pan"));
+        //TODO: BACON_CUBES
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPAGHETTI_COOKED, GameObjects.SPOON }, "Put the spagetti inside the bowl with the egg yolk and mix well."));
+        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.NUTMEG }, "Put Bacon cubes in pan and then sear them"));
+
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.EGG }, "Seperate eggs and put egg yolk in the bowl"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SALT, GameObjects.PEPPER, GameObjects.NUTMEG }, "Add salt, pepper and " + Ingredients[GameObjects.NUTMEG].amount.ToString() + " pinches of nutmeg powder to egg yolk"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Whisk everything"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.BUTTER }, "Add " + Ingredients[GameObjects.BUTTER].amount.ToString() + "g butter to egg yolk"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Cream butter and mix well with egg yolks"));
+        //TODO: BACON_CUBES
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.PARMESAN }, "Add bacon cubes and parmesan"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Whisk everything"));
+
+        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.OLIVE_OIL }, "Now noodles have to be cooked.Put water in a deep pan and boil water."));
+        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.SPAGHETTI }, "When the water boils put the spagetti inside the deep pan."));
+        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.SPOON }, "Wait about 10 minutes and stir every now and then."));
+
+
+
+
 
 
         /*
@@ -69,6 +88,7 @@ public class Carbonara:IRecipe
         steps.Add("Bacon cubes in pan");
         steps.Add("Bacon cubes sear"); // sear = anbraten
         steps.Add("Seperate eggs(Wenn dieser Schritt auftaucht, Extraoption.Schwebendes Fragezeichen, falls ja, wird der Nutzer auf ein Unterprogramm umgeleitet, das erklärt, wie man Eier trennt)");
+
         steps.Add("Put egg yolk in bowl"); // Egg yolk = Eigelb
         steps.Add("Add salt, pepper and " + Ingredients["nutmeg powder"].amount.ToString() + " pinches of nutmeg powder to egg yolk");
         steps.Add("Whisk"); // Whisk = Verquirlen 

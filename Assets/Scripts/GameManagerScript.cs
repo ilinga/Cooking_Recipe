@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -57,7 +58,7 @@ public class GameManagerScript : MonoBehaviour
                         {
                             var workingObjectPosition = obj.transform.position;
                             var distanceSqr = (goalObjectPosition - workingObjectPosition).sqrMagnitude;
-                            if (distanceSqr <= 0.02)
+                            if (distanceSqr <= 0.05)
                             {
                                 objectsToRemove.Add(workingObject);
                             }
@@ -304,21 +305,28 @@ public class GameManagerScript : MonoBehaviour
         if(_workinObjectAnimationIndex < currentStep.WorkingObjects.Count)
         {
             var workingObject = currentStep.WorkingObjects[_workinObjectAnimationIndex];
-
-            switch (_recipe.Ingredients[workingObject].animation)
+            try
             {
-                case AnimationType.DROP:
-                    DropAnimationStart(GetGameObject(workingObject));
-                    break;
-                case AnimationType.MOVE_IN_CIRCLE:
-                    CircleMovementAnimationStart(GetGameObject(workingObject));
-                    break;
-                case AnimationType.ROTATE_VERTICAL:
-                    RotateAnimationStart(GetGameObject(workingObject));
-                    break;
-                default:
-                    break;
+                switch (_recipe.Ingredients[workingObject].animation)
+                {
+                    case AnimationType.DROP:
+                        DropAnimationStart(GetGameObject(workingObject));
+                        break;
+                    case AnimationType.MOVE_IN_CIRCLE:
+                        CircleMovementAnimationStart(GetGameObject(workingObject));
+                        break;
+                    case AnimationType.ROTATE_VERTICAL:
+                        RotateAnimationStart(GetGameObject(workingObject));
+                        break;
+                    default:
+                        break;
+                }
             }
+            catch (Exception e)
+            {
+                DropAnimationStart(GetGameObject(workingObject));
+            }
+            
         }
         // Reset index as all animations are shown
         else
@@ -336,7 +344,7 @@ public class GameManagerScript : MonoBehaviour
         if (!_animationIsOn)
         {
             _animationIsOn = true;
-            ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.2f, _postionOfAnchor.z));
+            ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.3f, _postionOfAnchor.z));
             _currentAnimationObject = workingObject;
             GameObject.FindGameObjectWithTag(workingObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
         }
@@ -356,6 +364,9 @@ public class GameManagerScript : MonoBehaviour
                     break;
                 case GameObjects.DEEPPAN:
                     ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z));
+                    break;
+                case GameObjects.BOWL:
+                    ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.06f, _postionOfAnchor.z));
                     break;
                 default:
                     ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z));
