@@ -22,6 +22,7 @@ TagManager:
   - back_button
   - text_next_button
   - cooking_book
+  - olive_oil_child
   layers:
   - Default
   - TransparentFX

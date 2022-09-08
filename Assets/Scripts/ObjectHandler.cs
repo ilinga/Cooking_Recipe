@@ -41,6 +41,6 @@ public class ObjectHandler : MonoBehaviour
 
     public static void RemoveObject(GameObject gameObject)
     {
-        Destroy(gameObject);
+        Destroy(gameObject.gameObject);
     }
 }

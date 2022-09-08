@@ -13,9 +13,9 @@ public class Lasagna:IRecipe
     private Dictionary<string, Ingredient> CreateIngredients()
     {
         Dictionary<string, Ingredient> ingredients = new Dictionary<string, Ingredient>();
-        ingredients.Add("lasagna plates", new Ingredient("Lasagna plates", 100 * Participants, "g"));
-        ingredients.Add("minced meat", new Ingredient("Minced meat", 250 * Participants, "g"));
-        ingredients.Add("salt", new Ingredient("Salt", 1, ""));
+        ingredients.Add("lasagna plates", new Ingredient("Lasagna plates", 100 * Participants, "g", AnimationType.DROP));
+        ingredients.Add("minced meat", new Ingredient("Minced meat", 250 * Participants, "g", AnimationType.DROP));
+        ingredients.Add("salt", new Ingredient("Salt", 1, "", AnimationType.DROP));
         return ingredients;
     }
 
