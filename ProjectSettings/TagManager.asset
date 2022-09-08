@@ -23,6 +23,7 @@ TagManager:
   - text_next_button
   - cooking_book
   - olive_oil_child
+  - bowl_with_spaghetti
   layers:
   - Default
   - TransparentFX

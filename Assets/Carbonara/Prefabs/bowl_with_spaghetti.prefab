@@ -144,6 +144,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bowl_with_spaghetti
       objectReference: {fileID: 0}
+    - target: {fileID: 8237973425758970244, guid: e4b80afb97d59ac43b34903870cf776c, type: 3}
+      propertyPath: m_TagString
+      value: bowl_with_spaghetti
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4b80afb97d59ac43b34903870cf776c, type: 3}
 --- !u!4 &6148975300584917555 stripped

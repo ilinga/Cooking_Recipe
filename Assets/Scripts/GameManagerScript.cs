@@ -369,7 +369,7 @@ public class GameManagerScript : MonoBehaviour
                     ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.06f, _postionOfAnchor.z));
                     break;
                 default:
-                    ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.15f, _postionOfAnchor.z));
+                    ObjectHandler.AddObject(workingObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.06f, _postionOfAnchor.z));
                     break;
             }
 
