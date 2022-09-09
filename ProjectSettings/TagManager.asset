@@ -24,6 +24,17 @@ TagManager:
   - cooking_book
   - olive_oil_child
   - bowl_with_spaghetti
+  - bacon_cubes_animator
+  - olive_oil_animator
+  - spaghetti_animator
+  - butter_animator
+  - egg_animator
+  - nutmeg_animator
+  - parmesan_animator
+  - pepper_animator
+  - salt_animator
+  - spaghetti_cooked_animator
+  - spoon_animator
   layers:
   - Default
   - TransparentFX
