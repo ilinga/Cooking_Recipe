@@ -35,6 +35,8 @@ TagManager:
   - salt_animator
   - spaghetti_cooked_animator
   - spoon_animator
+  - water_bottle
+  - water_bottle_animator
   layers:
   - Default
   - TransparentFX
