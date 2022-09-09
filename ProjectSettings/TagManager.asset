@@ -37,6 +37,8 @@ TagManager:
   - spoon_animator
   - water_bottle
   - water_bottle_animator
+  - deeppan_animator
+  - deeppan_with_water
   layers:
   - Default
   - TransparentFX
