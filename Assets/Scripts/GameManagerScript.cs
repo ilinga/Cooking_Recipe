@@ -19,6 +19,7 @@ public class GameManagerScript : MonoBehaviour
     private bool _animationIsOn = false;
     private int _workinObjectAnimationIndex = 0;
     private GameObject _currentAnimationObject;
+    private bool _goalObjectAnimation = false;
 
     #endregion
 
@@ -310,6 +311,24 @@ public class GameManagerScript : MonoBehaviour
             if (!_animationIsOn)
             {
                 _animationIsOn = true;
+
+                if(workingObjectName == GameObjects.WATER_BOTTLE && _goalObject.name == GameObjects.DEEPPAN)
+                {
+                    _goalObjectAnimation = true;
+                    ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(_goalObject.name));
+                    // Place DEEPPAN Animator object
+                    var goalObjectAnimator = GetGameObject(GameObjects.DEEPPAN + "_animator");
+                    ObjectHandler.AddObject(goalObjectAnimator, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.4f, _postionOfAnchor.z));
+                    // Place Water bottle
+                    ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.4f, _postionOfAnchor.z));
+
+                    _currentAnimationObject = animaterObject;
+                    GameObject.FindGameObjectWithTag(animaterObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
+                    // Set Animation of DEEPPAN Animator Object
+                    GameObject.FindGameObjectWithTag(goalObjectAnimator.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
+
+                }
+
                 try
                 {
                     switch (_recipe.Ingredients[workingObjectName].animation)
@@ -342,24 +361,20 @@ public class GameManagerScript : MonoBehaviour
         else
         {
             _workinObjectAnimationIndex = 0;
-            PlaceObjectsOfCurrentStep();
+            PlaceObjectsOfCurrentStep();   
         }
         
 
     }
 
+    
     /// <summary>
     /// Places object for drop animation
     /// </summary>
     /// <param name="animaterObject"></param>
     private void DropAnimation(GameObject animaterObject)
     {
-        
         ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.3f, _postionOfAnchor.z));
-        //_currentAnimationObject = animaterObject;
-        //GameObject.FindGameObjectWithTag(animaterObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
-        
-
     }
 
     /// <summary>
@@ -384,9 +399,6 @@ public class GameManagerScript : MonoBehaviour
                 break;
         }
 
-        //_currentAnimationObject = animaterObject;
-        //GameObject.FindGameObjectWithTag(animaterObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
-        
     }
 
     /// <summary>
@@ -412,6 +424,15 @@ public class GameManagerScript : MonoBehaviour
 
     private void AnimationEnd()
     {
+        if (_goalObjectAnimation)
+        {
+            _goalObjectAnimation = false;
+            var goalAnimatorObjectName = _goalObject.name + "_animator";
+            GameObject.FindGameObjectWithTag(goalAnimatorObjectName).GetComponentInChildren<Animator>().SetBool("makeAnimation", false);
+            ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(goalAnimatorObjectName));
+            PlaceManager(new List<GameObject> { _goalObject }, new List<Vector3> { _postionOfAnchor });
+        }
+            
         GameObject.FindGameObjectWithTag(_currentAnimationObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", false);
         ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(_currentAnimationObject.name));
         _animationIsOn = false;
