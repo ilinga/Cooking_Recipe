@@ -20,4 +20,5 @@ public static class GameObjects
     public const string COOKING_BOOK = "cooking_book";
     public const string BOWL_WITH_SPAGHETTI = "bowl_with_spaghetti";
     public const string WATER_BOTTLE = "water_bottle";
+    public const string DEEPPAN_WITH_WATER = "deeppan_with_water";
 }

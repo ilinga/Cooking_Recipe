@@ -60,8 +60,6 @@ public class Carbonara:IRecipe
     {
         _cookingSteps = new List<CookingStep>();
 
-        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.WATER_BOTTLE }, "Now noodles have to be cooked.Put water in a deep pan and boil water."));
-
         _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.OLIVE_OIL }, "Put olive oil in pan"));
         //TODO: BACON_CUBES
         _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.NUTMEG }, "Put Bacon cubes in pan and then sear them"));
@@ -76,8 +74,8 @@ public class Carbonara:IRecipe
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Whisk everything"));
 
         _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.WATER_BOTTLE }, "Now noodles have to be cooked.Put water in a deep pan and boil water."));
-        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.SPAGHETTI }, "When the water boils put the spagetti inside the deep pan."));
-        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.SPOON }, "Wait about 10 minutes and stir every now and then."));
+        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN_WITH_WATER, new List<string> { GameObjects.SPAGHETTI }, "When the water boils put the spagetti inside the deep pan."));
+        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN_WITH_WATER, new List<string> { GameObjects.SPOON }, "Wait about 10 minutes and stir every now and then."));
 
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPAGHETTI_COOKED }, "Put the spagetti inside the bowl with the egg yolk."));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL_WITH_SPAGHETTI, new List<string> { GameObjects.SPOON }, "Mix well."));

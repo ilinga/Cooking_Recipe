@@ -318,40 +318,43 @@ public class GameManagerScript : MonoBehaviour
                     ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(_goalObject.name));
                     // Place DEEPPAN Animator object
                     var goalObjectAnimator = GetGameObject(GameObjects.DEEPPAN + "_animator");
-                    ObjectHandler.AddObject(goalObjectAnimator, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.4f, _postionOfAnchor.z));
+                    ObjectHandler.AddObject(goalObjectAnimator, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y, _postionOfAnchor.z));
                     // Place Water bottle
                     ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.4f, _postionOfAnchor.z));
 
                     _currentAnimationObject = animaterObject;
                     GameObject.FindGameObjectWithTag(animaterObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
                     // Set Animation of DEEPPAN Animator Object
-                    GameObject.FindGameObjectWithTag(goalObjectAnimator.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
+                    GameObject.FindGameObjectWithTag(goalObjectAnimator.name).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
 
-                }
-
-                try
+                } else
                 {
-                    switch (_recipe.Ingredients[workingObjectName].animation)
+                    try
                     {
-                        case AnimationType.DROP:
-                            DropAnimation(animaterObject);
-                            break;
-                        case AnimationType.MOVE_IN_CIRCLE:
-                            CircleMovementAnimation(animaterObject);
-                            break;
-                        case AnimationType.ROTATE_VERTICAL:
-                            RotateAnimation(animaterObject);
-                            break;
-                        default:
-                            break;
+                        switch (_recipe.Ingredients[workingObjectName].animation)
+                        {
+                            case AnimationType.DROP:
+                                DropAnimation(animaterObject);
+                                break;
+                            case AnimationType.MOVE_IN_CIRCLE:
+                                CircleMovementAnimation(animaterObject);
+                                break;
+                            case AnimationType.ROTATE_VERTICAL:
+                                RotateAnimation(animaterObject);
+                                break;
+                            default:
+                                break;
+                        }
                     }
+                    catch (Exception e)
+                    {
+                        DropAnimation(animaterObject);
+                    }
+                    _currentAnimationObject = animaterObject;
+                    GameObject.FindGameObjectWithTag(animaterObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
                 }
-                catch (Exception e)
-                {
-                    DropAnimation(animaterObject);
-                }
-                _currentAnimationObject = animaterObject;
-                GameObject.FindGameObjectWithTag(animaterObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
+
+                
 
             }
 
@@ -428,8 +431,10 @@ public class GameManagerScript : MonoBehaviour
         {
             _goalObjectAnimation = false;
             var goalAnimatorObjectName = _goalObject.name + "_animator";
-            GameObject.FindGameObjectWithTag(goalAnimatorObjectName).GetComponentInChildren<Animator>().SetBool("makeAnimation", false);
+            GameObject.FindGameObjectWithTag(goalAnimatorObjectName).gameObject.transform.GetChild(0).gameObject.GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
             ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(goalAnimatorObjectName));
+            // new goal object with water inside
+            _goalObject = GetGameObject(GameObjects.DEEPPAN_WITH_WATER);
             PlaceManager(new List<GameObject> { _goalObject }, new List<Vector3> { _postionOfAnchor });
         }
             
