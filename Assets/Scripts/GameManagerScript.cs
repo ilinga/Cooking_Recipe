@@ -24,6 +24,8 @@ public class GameManagerScript : MonoBehaviour
     #endregion
 
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,7 @@ public class GameManagerScript : MonoBehaviour
                 // (so that back button still works from last step, otherwise it gets incremented each frame)
                 else if (_currentStep < _recipe.CookingSteps.Count)
                 {
+                    GameObject.Find("step_info").GetComponent<MeshRenderer>().enabled = false;
                     _currentStep++;
                     NextStep();
                 }
@@ -155,6 +158,19 @@ public class GameManagerScript : MonoBehaviour
             }
         }
 
+        //assign info text position over goal object and show info text
+        var stepInfoTextObj = GameObject.Find("step_info");
+        var boundsCalc = new Bounds(GameObject.FindGameObjectWithTag(_goalObject.name).transform.position, Vector3.zero);
+        foreach (Renderer r in GameObject.FindGameObjectWithTag(_goalObject.name).GetComponentsInChildren<Renderer>())
+        {
+            boundsCalc.Encapsulate(r.bounds);
+        }
+
+        var targetPos = boundsCalc.center;
+        var elevation = targetPos.y + boundsCalc.size.y / 2 + 0.1;
+        stepInfoTextObj.transform.position = new Vector3(GameObject.FindGameObjectWithTag(_goalObject.name).transform.position.x, (float)elevation, GameObject.FindGameObjectWithTag(_goalObject.name).transform.position.z);
+        stepInfoTextObj.GetComponent<MeshRenderer>().enabled=true;
+        
         PlaceManager(_workingObjects, positionOfWorkingObjects);
     }
 
@@ -165,6 +181,10 @@ public class GameManagerScript : MonoBehaviour
         var cookingStep = _recipe.CookingSteps[_currentStep];
         _goalObject = GetGameObject(cookingStep.GoalObject);
         PlaceManager(new List<GameObject> { _goalObject }, new List<Vector3> { _postionOfAnchor });
+
+        // set info text for current step
+        GameObject.Find("step_info").GetComponent<MeshRenderer>().enabled = false;
+        GameObject.Find("step_info").GetComponent<TMPro.TextMeshPro>().text = cookingStep.Discription;
 
         // Set working objects
         _workingObjects = null;
@@ -244,6 +264,7 @@ public class GameManagerScript : MonoBehaviour
                     //_workingObjects.Remove(obj);
                     ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
                 }
+                GameObject.Find("step_info").GetComponent<MeshRenderer>().enabled = false;
 
                 _workingObjects.Clear();
                 _currentStep++;

@@ -20,6 +20,6 @@ public class IngredientEntry : MonoBehaviour
     public void setContent(Ingredient data)
     {
         transform.Find("Ingredient").GetComponent<TMPro.TextMeshPro>().text = data.name;
-        transform.Find("Amount").GetComponent<TMPro.TextMeshPro>().text = data.amount + data.unit;
+        transform.Find("Amount").GetComponent<TMPro.TextMeshPro>().text = data.getAmountString();
     }
 }

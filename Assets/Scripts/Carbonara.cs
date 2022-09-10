@@ -33,25 +33,25 @@ public class Carbonara:IRecipe
     {
         _ingrediants = new Dictionary<string, Ingredient>();
         // 400g Spaghetti für 4 Personen --> 100g pro Person
-        _ingrediants.Add(GameObjects.SPAGHETTI, new Ingredient("Spaghetti", 100 * Participants, "g", AnimationType.DROP));
+        _ingrediants.Add(GameObjects.SPAGHETTI, new Ingredient("Spaghetti", 100 * Participants, "g", false, AnimationType.DROP));
         // 200g Speckwürfel für 4 Personen --> 50g pro Person
-        _ingrediants.Add(GameObjects.BACON_CUBES, new Ingredient("Bacon cubes", 50 * Participants, "g", AnimationType.DROP));
+        _ingrediants.Add(GameObjects.BACON_CUBES, new Ingredient("Bacon cubes", 50 * Participants, "g", false, AnimationType.DROP));
         // 4 Eier für 4 Personen --> 1 Ei pro Person
-        _ingrediants.Add(GameObjects.EGG, new Ingredient("Eggs", 1 * Participants, "", AnimationType.DROP));
+        _ingrediants.Add(GameObjects.EGG, new Ingredient("Eggs", 1 * Participants, "", false, AnimationType.DROP));
         // 50g Butter für 4 Personen --> 12,5g pro Person
-        _ingrediants.Add(GameObjects.BUTTER, new Ingredient("Butter", (12.5 * Participants), "g", AnimationType.DROP));
+        _ingrediants.Add(GameObjects.BUTTER, new Ingredient("Butter", (12.5 * Participants), "g", false, AnimationType.DROP));
         // salt
-        _ingrediants.Add(GameObjects.SALT, new Ingredient("Salt", 1, "", AnimationType.ROTATE_VERTICAL));
+        _ingrediants.Add(GameObjects.SALT, new Ingredient("Salt", 1, "", false, AnimationType.ROTATE_VERTICAL));
         // pepper
-        _ingrediants.Add(GameObjects.PEPPER, new Ingredient("Pepper", 1, "", AnimationType.ROTATE_VERTICAL));
+        _ingrediants.Add(GameObjects.PEPPER, new Ingredient("Pepper", 1, "", false, AnimationType.ROTATE_VERTICAL));
         // 1 Prise Muskatpulver für 4 Personen --> 1/4 Prise pro Person
-        _ingrediants.Add(GameObjects.NUTMEG, new Ingredient("Nutmeg powder", (0.25 * Participants), "pinch", AnimationType.ROTATE_VERTICAL));
+        _ingrediants.Add(GameObjects.NUTMEG, new Ingredient("Nutmeg powder", (0.25 * Participants), "pinch", true, AnimationType.ROTATE_VERTICAL));
         // 100g Parmesan für 4 Personen --> 25g pro Person
-        _ingrediants.Add(GameObjects.PARMESAN, new Ingredient("Parmesan", (25 * Participants), "g", AnimationType.ROTATE_VERTICAL));
+        _ingrediants.Add(GameObjects.PARMESAN, new Ingredient("Parmesan", (25 * Participants), "g", false, AnimationType.ROTATE_VERTICAL));
         // spoon
-        _ingrediants.Add(GameObjects.SPOON, new Ingredient("Spoon", 1, "", AnimationType.MOVE_IN_CIRCLE));
+        _ingrediants.Add(GameObjects.SPOON, new Ingredient("Spoon", 1, "", false, AnimationType.MOVE_IN_CIRCLE));
         // olive_oil
-        _ingrediants.Add(GameObjects.OLIVE_OIL, new Ingredient("Olive oil", 1, "", AnimationType.ROTATE_VERTICAL));
+        _ingrediants.Add(GameObjects.OLIVE_OIL, new Ingredient("Olive oil", 1, "", false, AnimationType.ROTATE_VERTICAL));
         return _ingrediants;
     }
 
@@ -62,20 +62,20 @@ public class Carbonara:IRecipe
 
         _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.OLIVE_OIL }, "Put olive oil in pan"));
         //TODO: BACON_CUBES
-        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.NUTMEG }, "Put Bacon cubes in pan and then sear them"));
+        // _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.NUTMEG }, "Put Bacon cubes in pan and then sear them"));
 
-        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.EGG }, "Seperate eggs and put egg yolk in the bowl"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.EGG }, "Seperate eggs and put "+Ingredients[GameObjects.EGG].amount.ToString() +" egg yolk in the bowl"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SALT, GameObjects.PEPPER, GameObjects.NUTMEG }, "Add salt, pepper and " + Ingredients[GameObjects.NUTMEG].amount.ToString() + " pinches of nutmeg powder to egg yolk"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Whisk everything"));
-        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.BUTTER }, "Add " + Ingredients[GameObjects.BUTTER].amount.ToString() + "g butter to egg yolk"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.BUTTER }, "Add " + Ingredients[GameObjects.BUTTER].getAmountString() + " butter to egg yolk"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Cream butter and mix well with egg yolks"));
         //TODO: BACON_CUBES
-        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.PARMESAN }, "Add bacon cubes and parmesan"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.PARMESAN }, "Add bacon cubes and "+Ingredients[GameObjects.PARMESAN].getAmountString() +" parmesan"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Whisk everything"));
 
-        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.WATER_BOTTLE }, "Now noodles have to be cooked.Put water in a deep pan and boil water."));
-        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN_WITH_WATER, new List<string> { GameObjects.SPAGHETTI }, "When the water boils put the spagetti inside the deep pan."));
-        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN_WITH_WATER, new List<string> { GameObjects.SPOON }, "Wait about 10 minutes and stir every now and then."));
+        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.WATER_BOTTLE }, "Now noodles have to be cooked. Put water in a deep pan and boil water."));
+        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN_WITH_WATER, new List<string> { GameObjects.SPAGHETTI }, "When the water boils put "+Ingredients[GameObjects.SPAGHETTI].getAmountString()+" spagetti inside the deep pan."));
+        _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN_WITH_WATER, new List<string> { GameObjects.SPOON }, "Wait and stir every now and then. Consult the packaging of the spagetti for the correct cook time."));
 
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPAGHETTI_COOKED }, "Put the spagetti inside the bowl with the egg yolk."));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL_WITH_SPAGHETTI, new List<string> { GameObjects.SPOON }, "Mix well."));

@@ -66,7 +66,7 @@ public class RecipeInfo: MonoBehaviour
             transform.Find("Picture").GetComponent<MeshRenderer>().material.mainTexture = picture;
         }
 
-        showPage(1);
+        showPage(ingrediantPage);
     }
 
     public void nextPage() { 

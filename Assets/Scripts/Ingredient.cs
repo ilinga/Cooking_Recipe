@@ -7,13 +7,19 @@ public class Ingredient
 
     public AnimationType animation { get; set; }
 
-    //TODO public bool seperateUnitFromAmountWithSpace { get; }
+    public bool seperateUnitFromAmountWithSpace { get; }
 
-    public Ingredient(string name, double amount, string unit, AnimationType animation)
+    public Ingredient(string name, double amount, string unit, bool seperateUnitFromAmountWithSpace, AnimationType animation)
     {
         this.name = name;
         this.amount = amount;
         this.unit = unit;
         this.animation = animation;
+        this.seperateUnitFromAmountWithSpace = seperateUnitFromAmountWithSpace;
+    }
+
+    public String getAmountString()
+    {
+        return amount.ToString() + ((seperateUnitFromAmountWithSpace && !(unit is null) && unit.Length > 0) ? " " : "") + (!(unit is null)?unit:"");
     }
 }
