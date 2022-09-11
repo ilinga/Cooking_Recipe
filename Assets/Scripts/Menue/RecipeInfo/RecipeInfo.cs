@@ -13,12 +13,11 @@ public class RecipeInfo: MonoBehaviour
     private int ingrediantPage = 1;
 
     public int ingrediantSize = 9;
-    private IRecipe recipe;
 
     // Start is called before the first frame update
     void Start()
     {
-        setContent(null);
+        setContent();
     }
 
     // Update is called once per frame
@@ -26,6 +25,8 @@ public class RecipeInfo: MonoBehaviour
     {
         
     }
+
+    private IRecipe recipe => RecipeList.Recipes[RecipeList.selectedRecipeNo];
 
     void showPage(int page)
     {
@@ -42,21 +43,14 @@ public class RecipeInfo: MonoBehaviour
         transform.Find("Ingredient page").GetComponent<TMPro.TextMeshPro>().text = ingrediantPage.ToString() + "/" + ListUtil.getPages<Ingredient>(new List<Ingredient>(recipe.Ingredients.Values), ingrediantSize).ToString();
     }
 
-    void setContent(IRecipe data)
+    void setContent()
     {
-        if (data is null)
-        {
-            recipe = RecipeList.Recipes[RecipeList.selectedRecipeNo];
-        }
-        else
-        {
-            recipe = data;
-        }
+
 
 
         transform.Find("Name").GetComponent<TMPro.TextMeshPro>().text = recipe.Name;
         transform.Find("Duration").GetComponent<TMPro.TextMeshPro>().text = recipe.Duration < 60 ? recipe.Duration + " minutes" : Math.Round(Mathf.Ceil((float)recipe.Duration / 15) / 4, 2) + " hours";
-        transform.Find("Difficulty").GetComponent<TMPro.TextMeshPro>().text = (recipe.Difficulty == Difficulty.EASY ? "1" : recipe.Difficulty == Difficulty.MEDIUM ? "2" : "3") + "/3";
+        transform.Find("Difficulty").GetComponent<TMPro.TextMeshPro>().text = ((int)recipe.Difficulty).ToString() + "/" + (typeof(Difficulty).GetFields().Length-1).ToString();
         transform.Find("Participants no").GetComponent<TMPro.TextMeshPro>().text = recipe.Participants.ToString();
         transform.Find("Ingredient page").GetComponent<TMPro.TextMeshPro>().text = ingrediantPage.ToString() + "/" + ListUtil.getPages<Ingredient>(new List<Ingredient>(recipe.Ingredients.Values), ingrediantSize).ToString();
 
@@ -83,14 +77,14 @@ public class RecipeInfo: MonoBehaviour
     public void moreParticipants()
     {
         recipe.Participants = recipe.Participants + 1;
-        setContent(recipe);
+        setContent();
     }
     public void lessParticipants()
     {
         if (recipe.Participants > 1)
         {
             recipe.Participants = recipe.Participants - 1;
-            setContent(recipe);
+            setContent();
         }
     }
 

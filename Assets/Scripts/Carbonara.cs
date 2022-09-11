@@ -16,13 +16,18 @@ public class Carbonara:IRecipe
 
     public List<CookingStep> CookingSteps => _cookingSteps;
 
-    public int Participants { get => _participants; set => _participants = value; }
+    public int Participants { get => _participants; set => UpdateParticipants(value);  }
 
     public Dictionary<string, Ingredient> Ingredients => CreateIngredients();
 
     public string ImageName => "carbonara";
 
     public Carbonara(int participants)
+    {
+        UpdateParticipants(participants);
+    }
+
+    private void UpdateParticipants(int participants)
     {
         this._participants = participants;
         CreateIngredients();

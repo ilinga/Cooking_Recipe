@@ -33,7 +33,7 @@ public class RecipeCard : MonoBehaviour
         this.idx = idx;
         transform.Find("Name").GetComponent<TMPro.TextMeshPro>().text = data.Name;
         transform.Find("Duration").GetComponent<TMPro.TextMeshPro>().text = data.Duration < 60 ? data.Duration + " minutes" : Math.Round(Mathf.Ceil((float)data.Duration / 15) / 4,2) + " hours";
-        transform.Find("Difficulty").GetComponent<TMPro.TextMeshPro>().text = (data.Difficulty == Difficulty.EASY? "1": data.Difficulty == Difficulty.MEDIUM ? "2": "3") +"/3";
+        transform.Find("Difficulty").GetComponent<TMPro.TextMeshPro>().text = ((int)data.Difficulty).ToString() +"/" + (typeof(Difficulty).GetFields().Length-1).ToString();
 
         var picture = Resources.Load("RecipePictures\\" + data.ImageName) as Texture2D;
         if (!(picture is null)) {
