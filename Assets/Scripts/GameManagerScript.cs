@@ -20,6 +20,7 @@ public class GameManagerScript : MonoBehaviour
     private int _workinObjectAnimationIndex = 0;
     private GameObject _currentAnimationObject;
     private bool _goalObjectAnimation = false;
+    private bool _endScreenPlaced = false;
 
     #endregion
 
@@ -78,8 +79,27 @@ public class GameManagerScript : MonoBehaviour
                 else if (_currentStep < _recipe.CookingSteps.Count)
                 {
                     GameObject.Find("step_info").GetComponent<MeshRenderer>().enabled = false;
-                    _currentStep++;
-                    NextStep();
+                    if(_currentStep < _recipe.CookingSteps.Count - 1)
+                    {
+                        _currentStep++;
+                        NextStep();
+                    }
+                    else
+                    {
+                        if (!_endScreenPlaced)
+                        {
+                            _currentStep++;
+                            NextStep();
+                            if (GameObject.FindGameObjectWithTag(_goalObject.name))
+                                ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(_goalObject.name));
+                            //place end screen on last step
+                            var endRecipePosition = new Vector3 { x = _postionOfAnchor.x, y = _postionOfAnchor.y + 0.1f, z = _postionOfAnchor.z };
+                            var endObject = GetGameObject(GameObjects.BOARD_END);
+                            PlaceManager(new List<GameObject> { endObject }, new List<Vector3> { endRecipePosition });
+                            _endScreenPlaced = true;
+                        }
+                    }
+                    
                 }
 
             }
@@ -132,7 +152,9 @@ public class GameManagerScript : MonoBehaviour
         if (GameObject.FindGameObjectWithTag(_goalObject.name))
             ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(_goalObject.name));
         if (_currentStep < _recipe.CookingSteps.Count)
+        {
             StepHandler();
+        }
     }
 
 
@@ -258,7 +280,6 @@ public class GameManagerScript : MonoBehaviour
             // Recipe not finished yet
             if(_currentStep < _recipe.CookingSteps.Count)
             {
-                
                 foreach (var obj in _workingObjects)
                 {
                     //_workingObjects.Remove(obj);
@@ -267,8 +288,12 @@ public class GameManagerScript : MonoBehaviour
                 GameObject.Find("step_info").GetComponent<MeshRenderer>().enabled = false;
 
                 _workingObjects.Clear();
-                _currentStep++;
-                NextStep();
+                if(_currentStep < _recipe.CookingSteps.Count - 1)
+                {
+                    _currentStep++;
+                    NextStep();
+                }
+                
             }
             // Recipe finished
             else
@@ -291,12 +316,14 @@ public class GameManagerScript : MonoBehaviour
     /// </summary>
     public void BackStepViaButton()
     {
-        if(_currentStep > 0)
+        if (GameObject.FindGameObjectWithTag(GameObjects.BOARD_END))
+            ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(GameObjects.BOARD_END));
+        _endScreenPlaced = false;
+        if (_currentStep > 0)
         {
            
             foreach(var obj in _workingObjects)
                 ObjectHandler.RemoveObject(GameObject.FindGameObjectWithTag(obj.name));
-
             _workingObjects.Clear();
             _currentStep--;
             NextStep();
@@ -341,7 +368,7 @@ public class GameManagerScript : MonoBehaviour
                     var goalObjectAnimator = GetGameObject(GameObjects.DEEPPAN + "_animator");
                     ObjectHandler.AddObject(goalObjectAnimator, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y, _postionOfAnchor.z));
                     // Place Water bottle
-                    ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.4f, _postionOfAnchor.z));
+                    ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.2f, _postionOfAnchor.z));
 
                     _currentAnimationObject = animaterObject;
                     GameObject.FindGameObjectWithTag(animaterObject.name).GetComponentInChildren<Animator>().SetBool("makeAnimation", true);
@@ -398,7 +425,7 @@ public class GameManagerScript : MonoBehaviour
     /// <param name="animaterObject"></param>
     private void DropAnimation(GameObject animaterObject)
     {
-        ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.3f, _postionOfAnchor.z));
+        ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.2f, _postionOfAnchor.z));
     }
 
     /// <summary>
@@ -434,13 +461,13 @@ public class GameManagerScript : MonoBehaviour
         switch (_goalObject.name)
         {
             case GameObjects.PAN:
-                ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.4f, _postionOfAnchor.z));
+                ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.2f, _postionOfAnchor.z));
                 break;
             case GameObjects.BOWL:
-                ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.3f, _postionOfAnchor.z));
+                ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x, _postionOfAnchor.y + 0.2f, _postionOfAnchor.z));
                 break;
             default:
-                ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.4f, _postionOfAnchor.z));
+                ObjectHandler.AddObject(animaterObject, new Vector3(_postionOfAnchor.x + 0.2f, _postionOfAnchor.y + 0.2f, _postionOfAnchor.z));
                 break;
         }   
 

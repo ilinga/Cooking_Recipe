@@ -39,6 +39,7 @@ TagManager:
   - water_bottle_animator
   - deeppan_animator
   - deeppan_with_water
+  - board_end
   layers:
   - Default
   - TransparentFX

@@ -69,7 +69,7 @@ public class Carbonara:IRecipe
         //TODO: BACON_CUBES
         // _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.NUTMEG }, "Put Bacon cubes in pan and then sear them"));
 
-        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.EGG }, "Seperate eggs and put "+Ingredients[GameObjects.EGG].amount.ToString() +" egg yolk in the bowl"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.EGG }, "Separate eggs and put "+Ingredients[GameObjects.EGG].amount.ToString() +" egg yolk in the bowl"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SALT, GameObjects.PEPPER, GameObjects.NUTMEG }, "Add salt, pepper and " + Ingredients[GameObjects.NUTMEG].amount.ToString() + " pinches of nutmeg powder to egg yolk"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Whisk everything"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.BUTTER }, "Add " + Ingredients[GameObjects.BUTTER].getAmountString() + " butter to egg yolk"));
