@@ -182,15 +182,17 @@ public class GameManagerScript : MonoBehaviour
 
         //assign info text position over goal object and show info text
         var stepInfoTextObj = GameObject.Find("step_info");
-        var boundsCalc = new Bounds(GameObject.FindGameObjectWithTag(_goalObject.name).transform.position, Vector3.zero);
+
+        var firstbound = GameObject.FindGameObjectWithTag(_goalObject.name).GetComponentsInChildren<Renderer>()[0].bounds;
+        var boundsCalc = new Bounds(new Vector3(firstbound.center.x,firstbound.center.y,firstbound.center.z),Vector3.zero);
         foreach (Renderer r in GameObject.FindGameObjectWithTag(_goalObject.name).GetComponentsInChildren<Renderer>())
         {
             boundsCalc.Encapsulate(r.bounds);
         }
 
         var targetPos = boundsCalc.center;
-        var elevation = targetPos.y + boundsCalc.size.y / 2 + 0.1;
-        stepInfoTextObj.transform.position = new Vector3(GameObject.FindGameObjectWithTag(_goalObject.name).transform.position.x, (float)elevation, GameObject.FindGameObjectWithTag(_goalObject.name).transform.position.z);
+        var elevation = targetPos.y + boundsCalc.size.y / 2 + 0.15;
+        stepInfoTextObj.transform.position = new Vector3((boundsCalc.min.x+boundsCalc.max.x)/2, (float)elevation, (boundsCalc.min.z + boundsCalc.max.z) / 2);
         stepInfoTextObj.GetComponent<MeshRenderer>().enabled=true;
         
         PlaceManager(_workingObjects, positionOfWorkingObjects);
