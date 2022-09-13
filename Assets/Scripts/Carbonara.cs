@@ -8,7 +8,7 @@ public class Carbonara:IRecipe
     private Dictionary<string, Ingredient> _ingrediants;
     private List<CookingStep> _cookingSteps;
 
-    public string Name => "Spargetti Carbonara";
+    public string Name => "Spaghetti Carbonara";
 
     public Difficulty Difficulty => Difficulty.EASY_MEDIUM;
 
@@ -67,7 +67,7 @@ public class Carbonara:IRecipe
 
         _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.OLIVE_OIL }, "Put olive oil in pan"));
         //TODO: BACON_CUBES
-        // _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.NUTMEG }, "Put Bacon cubes in pan and then sear them"));
+        _cookingSteps.Add(new CookingStep(GameObjects.PAN, new List<string> { GameObjects.BACON_CUBES }, "Put Bacon cubes in pan and then sear them"));
 
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.EGG }, "Separate eggs and put "+Ingredients[GameObjects.EGG].amount.ToString() +" egg yolk in the bowl"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SALT, GameObjects.PEPPER, GameObjects.NUTMEG }, "Add salt, pepper and " + Ingredients[GameObjects.NUTMEG].amount.ToString() + " pinches of nutmeg powder to egg yolk"));
@@ -75,7 +75,7 @@ public class Carbonara:IRecipe
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.BUTTER }, "Add " + Ingredients[GameObjects.BUTTER].getAmountString() + " butter to egg yolk"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Cream butter and mix well with egg yolks"));
         //TODO: BACON_CUBES
-        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.PARMESAN }, "Add bacon cubes and "+Ingredients[GameObjects.PARMESAN].getAmountString() +" parmesan"));
+        _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.BACON_CUBES, GameObjects.PARMESAN }, "Add fried bacon cubes and "+Ingredients[GameObjects.PARMESAN].getAmountString() +" parmesan"));
         _cookingSteps.Add(new CookingStep(GameObjects.BOWL, new List<string> { GameObjects.SPOON }, "Whisk everything"));
 
         _cookingSteps.Add(new CookingStep(GameObjects.DEEPPAN, new List<string> { GameObjects.WATER_BOTTLE }, "Now noodles have to be cooked. Put water in a deep pan and boil water."));
