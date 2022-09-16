@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public static class RecipeList
 {
-    public static List<IRecipe> Recipes = new List<IRecipe>() { new Carbonara(1), new Lasagna(1) };
+    public static List<IRecipe> Recipes = new List<IRecipe>() { new Carbonara(1), new FriedEgg(1) };
 
     /// <summary>
     /// denotes which recipe should be shown in Scene "Recipe_Detail"

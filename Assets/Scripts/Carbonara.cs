@@ -12,7 +12,7 @@ public class Carbonara:IRecipe
 
     public Difficulty Difficulty => Difficulty.EASY_MEDIUM;
 
-    public int Duration => 20;
+    public int Duration => 40;
 
     public List<CookingStep> CookingSteps => _cookingSteps;
 
