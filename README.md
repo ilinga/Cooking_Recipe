@@ -161,15 +161,19 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Coding object interaction
     - [x] Collision
     - [x] "Grabbability"
-- [ ] Desgin menu and UI
-    - [ ] Recipe selection
-    - [ ] Recipe details
-    - [ ] Participant adjustment
-- [ ] Coding step-by-step recipe progress
-    - [ ] Framework for stepping through recipe
-    - [ ] Data models
-    - [ ] Populating for Carbonara recipe
-- [ ] Analyze usability
+- [x] Desgin menu and UI
+    - [x] Recipe selection
+    - [x] Recipe details
+    - [x] Participant adjustment
+    - [x] Intruction Labels
+- [x] Coding step-by-step recipe progress
+    - [x] Framework for stepping through recipe
+    - [x] Data models
+    - [x] Populating for Carbonara recipe
+- [x] Animations
+    - [x] Pouring
+    - [x] Dropping
+    - [x] Stirring  
 
 
 See the [open issues](https://github.com/ilinga/Cooking_Recipe/issues) list of known issues.
